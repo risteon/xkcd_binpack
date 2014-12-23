@@ -22,12 +22,22 @@ public:
   //! Destructor
   virtual ~ShapeContainer()     {}
 
-  //! Load from images file directory
+  //! Load from images file directory or XML-File
   void load(const std::string& directory);
+
+  //! Write to xml
+  void writeToXml(const std::string& filename);
 
 private:
   //! Save shapes
   ShapeCollection m_shapes;
+
+  //! XML constant strings
+  static const constexpr char* XML_ROOT = "shape_collection";
+  static const constexpr char* XML_NODE = "shape";
+  static const constexpr char* XML_PATH = "path";
+  static const constexpr char* XML_WIDTH = "width";
+  static const constexpr char* XML_HEIGHT = "height";
 };
 
 

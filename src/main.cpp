@@ -5,7 +5,7 @@
 
 int main(int argc, char** argv )
 {
-    if ( argc != 2 )
+    if ( argc < 2 )
     {
         printf("usage: xkcd_binpack <Image_Path>\n       xkcd_binpack <ImageDescription.xml>\n");
         return -1;
@@ -15,6 +15,8 @@ int main(int argc, char** argv )
     try
     {
       sc.load(std::string(argv[1]));
+      if (argc > 2)
+        sc.writeToXml(argv[2]);
     }
     catch (MessageException& e)
     {

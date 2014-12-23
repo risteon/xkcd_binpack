@@ -12,6 +12,9 @@ public:
   //! Pointer shorthand
   typedef std::shared_ptr<Shape> Ptr;
 
+  //! Const Pointer shorthand
+  typedef std::shared_ptr<const Shape> ConstPtr;
+
   //! Dimensions
   typedef u_int32_t _dimension_type;
   typedef std::array<_dimension_type, 2> Dimensions;

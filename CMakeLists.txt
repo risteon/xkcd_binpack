@@ -7,6 +7,8 @@ find_package(Boost COMPONENTS system filesystem REQUIRED)
 # Enable C++11 support in GNU-Compiler
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
+SET(CMAKE_BUILD_TYPE "Debug")
+
 add_subdirectory(tinyxml2)
 
 include_directories(

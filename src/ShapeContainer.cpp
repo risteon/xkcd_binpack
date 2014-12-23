@@ -1,5 +1,6 @@
 #include <boost/filesystem.hpp>
 #include <opencv2/opencv.hpp>
+#include <tinyxml2.h>
 #include <exception>
 
 #include "ShapeContainer.h"
@@ -12,7 +13,7 @@ void ShapeContainer::load(const std::string& directory)
 
   if (!exists(p))
   {
-    throw MessageException(std::string("Directory <") + directory + std::string("> not found."));
+    throw MessageException(std::string("Directory or file <") + directory + std::string("> not found."));
   }
 
   // load from every image found
@@ -41,12 +42,49 @@ void ShapeContainer::load(const std::string& directory)
     }
   }
   // load from XML
-  else if (is_regular_file(p))
+  else if (is_regular_file(p) && p.extension() == ".xml")
   {
+    tinyxml2::XMLDocument doc;
+    if (doc.LoadFile(p.string().c_str()) != tinyxml2::XML_SUCCESS)
+      throw MessageException(std::string("Could not open shape data from <") + p.string() + std::string(">."));
 
+    tinyxml2::XMLElement* root = doc.FirstChildElement(XML_ROOT);
+    if (root == nullptr)
+    {
+      throw MessageException(std::string("Invalid XML File") );
+    }
+    for (tinyxml2::XMLElement* node = root->FirstChildElement(XML_NODE); node != nullptr; node = node->NextSiblingElement(XML_NODE))
+    {
+      Shape::Ptr shape = std::make_shared<Shape>();
+      const char* file = node->Attribute(XML_PATH);
+      if (file == nullptr)
+        throw MessageException(std::string("Invalid XML File") );
+      shape->setFilename(file);
+      shape->setDimensions(node->IntAttribute(XML_WIDTH), node->IntAttribute(XML_HEIGHT));
+      m_shapes.push_back(shape);
+    }
   }
   else
   {
      throw MessageException(std::string("Cannot use file <") + directory + std::string("> to load image dimensions."));
   }
+}
+
+void ShapeContainer::writeToXml(const std::string& filename)
+{
+  tinyxml2::XMLDocument doc;
+  tinyxml2::XMLElement* root = doc.NewElement(XML_ROOT);
+  doc.InsertFirstChild(root);
+
+  for (const Shape::ConstPtr& s : m_shapes)
+  {
+    tinyxml2::XMLElement* e = doc.NewElement(XML_NODE);
+    root->InsertEndChild(e);
+    e->SetAttribute(XML_PATH, s->getFilename().c_str());
+    e->SetAttribute(XML_WIDTH, s->getDimensions()[0]);
+    e->SetAttribute(XML_HEIGHT, s->getDimensions()[1]);
+  }
+
+  if (doc.SaveFile(filename.c_str()) != tinyxml2::XML_SUCCESS)
+    throw MessageException(std::string("Could not write shape data to <") + filename + std::string(">."));
 }
