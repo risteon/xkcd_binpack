@@ -1,7 +1,9 @@
-#ifndef PICTURE_DATA_H
-#define PICTURE_DATA_H
+#ifndef SHAPE_CONTAINER_H
+#define SHAPE_CONTAINER_H
 
 #include <memory>
+
+#include "Shape.h"
 
 class ShapeContainer
 {
@@ -20,4 +22,4 @@ private:
 };
 
 
-#endif //PICTURE_DATA_H
+#endif //SHAPE_CONTAINER_H

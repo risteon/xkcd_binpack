@@ -10,15 +10,19 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 add_subdirectory(tinyxml2)
 
 include_directories(
-		export/include
-		)
+  export/include
+)
 
 set(HEADERS
-		src/ShapeContainer.h
+  src/Point.h
+  src/ShapeContainer.h
+  src/Shape.h
 )
 
 set(SOURCES
-		src/ShapeContainer.cpp
+  src/Point.cpp
+  src/ShapeContainer.cpp
+  src/Shape.cpp
   src/main.cpp
 )
 
