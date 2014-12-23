@@ -13,20 +13,28 @@ public:
   typedef std::shared_ptr<Shape> Ptr;
 
   //! Dimensions
-  typedef std::tuple<_position_type, _position_type> Dimensions;
+  typedef u_int32_t _dimension_type;
+  typedef std::array<_dimension_type, 2> Dimensions;
 
   //! Constructor
-  Shape()              {}
+  Shape();
 
   //! Destructor
   virtual ~Shape()     {}
 
   //!
-  void setPosition(const Point& position)         { m_position = position; }
+  void setPosition(const Point& position)                               { m_position = position; }
+
+  //!
+  void setDimensions(_dimension_type width, _dimension_type height)     { m_dimensions = { width, height }; }
+
+  //!
+  void setFilename(const std::string& filename)                         { m_filename = filename; }
 
   //! Read Access
   const Point& getPosition() const                { return m_position; }
   const Dimensions& getDimensions() const         { return m_dimensions; }
+  const std::string& getFilename() const          { return m_filename; }
 
 private:
   //! Position of shape
@@ -34,6 +42,9 @@ private:
 
   //! Dimensions
   Dimensions m_dimensions;
+
+  //! Data to identify picture
+  std::string m_filename;
 };
 
 

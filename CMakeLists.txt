@@ -14,6 +14,7 @@ include_directories(
 )
 
 set(HEADERS
+  src/MessageException.h
   src/Point.h
   src/ShapeContainer.h
   src/Shape.h
