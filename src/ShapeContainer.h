@@ -38,8 +38,14 @@ public:
   //! Destructor
   virtual ~ShapeContainer()     {}
 
-  //! Load from images file directory or XML-File
-  void load(const std::string& directory);
+  //! Load by interpreting string as arbitrary data source
+  void load(const std::string& data_access);
+
+  //! Load image shapes from xml_file
+  void loadFromXML(const std::string& xml_file);
+
+  //! Load from images in folder
+  void loadFromImageFolder(const std::string& directory);
 
   //! Write to xml
   void writeToXml(const std::string& filename);
