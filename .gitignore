@@ -36,3 +36,6 @@ CMakeLists.txt.user
 # Folders
 build/**
 export/**
+
+# Clion ideo
+.idea/**
