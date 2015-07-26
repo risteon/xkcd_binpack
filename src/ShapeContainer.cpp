@@ -1,3 +1,17 @@
+// this is for emacs file handling -*- mode: c++; indent-tabs-mode: nil -*-
+
+// -- BEGIN LICENSE BLOCK ----------------------------------------------
+// -- END LICENSE BLOCK ------------------------------------------------
+
+//----------------------------------------------------------------------
+/*!\file
+ *
+ * \author  Christoph Rist <rist.christoph@gmail.com>
+ * \date    2014-12-28
+ *
+ */
+//----------------------------------------------------------------------
+
 #include <boost/filesystem.hpp>
 #include <opencv2/opencv.hpp>
 #include <tinyxml2.h>

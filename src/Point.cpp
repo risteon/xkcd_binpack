@@ -6,7 +6,7 @@
 //----------------------------------------------------------------------
 /*!\file
  *
- * \author  Christoph Rist <rist@fzi.de>
+ * \author  Christoph Rist <rist.christoph@gmail.com>
  * \date    2014-11-17
  *
  */
