@@ -15,29 +15,29 @@
 #include <stdio.h>
 #include <iostream>
 
-#include "ShapeContainer.h"
+#include "ShapeCreator.h"
 
 using namespace xkcd_binpack;
 
 int main(int argc, char** argv )
 {
-    if ( argc < 2 )
-    {
-        printf("usage: xkcd_binpack <Image_Path>\n       xkcd_binpack <ImageDescription.xml>\n");
-        return -1;
-    }
+  if ( argc < 2 )
+  {
+    printf("usage: xkcd_binpack <Image_Path>\n       xkcd_binpack <ImageDescription.xml>\n");
+    return -1;
+  }
 
-    ShapeContainer sc;
-    try
-    {
-      sc.load(std::string(argv[1]));
-      if (argc > 2)
-        sc.writeToXml(argv[2]);
-    }
-    catch (MessageException& e)
-    {
-      std::cout <<e.what() <<std::endl;
-    }
+  ShapeCollection sc;
+  try
+  {
+    ShapeCreator::load(std::string(argv[1]), sc);
+    if (argc > 2)
+      ShapeCreator::writeToXml(argv[2], sc);
+  }
+  catch (MessageException& e)
+  {
+    std::cout <<e.what() <<std::endl;
+  }
 
-    return 0;
+  return 0;
 }

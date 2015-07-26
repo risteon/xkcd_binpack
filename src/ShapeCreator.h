@@ -23,43 +23,29 @@
 
 namespace xkcd_binpack {
 
-class ShapeContainer
+class ShapeCreator
 {
 public:
-  //! Pointer shorthand
-  typedef std::shared_ptr<ShapeContainer> Ptr;
-
-  //! Shapes
-  typedef std::vector<Shape::Ptr> ShapeCollection;
-
-  //! Constructor
-  ShapeContainer()              {}
-
-  //! Destructor
-  virtual ~ShapeContainer()     {}
-
   //! Load by interpreting string as arbitrary data source
-  void load(const std::string& data_access);
+  static void load(const std::string& data_access, ShapeCollection& sc);
 
   //! Load image shapes from xml_file
-  void loadFromXML(const std::string& xml_file);
+  static void loadFromXML(const std::string& xml_file, ShapeCollection& sc);
 
   //! Load from images in folder
-  void loadFromImageFolder(const std::string& directory);
+  static void loadFromImageFolder(const std::string& directory, ShapeCollection& sc);
 
   //! Write to xml
-  void writeToXml(const std::string& filename);
+  static void writeToXml(const std::string& filename, const ShapeCollection& sc);
 
 private:
-  //! Save shapes
-  ShapeCollection m_shapes;
 
   //! XML constant strings
-  static const constexpr char* XML_ROOT = "shape_collection";
-  static const constexpr char* XML_NODE = "shape";
-  static const constexpr char* XML_PATH = "path";
-  static const constexpr char* XML_WIDTH = "width";
-  static const constexpr char* XML_HEIGHT = "height";
+  static constexpr auto XML_ROOT = "shape_collection";
+  static constexpr auto XML_NODE = "shape";
+  static constexpr auto XML_PATH = "path";
+  static constexpr auto XML_WIDTH = "width";
+  static constexpr auto XML_HEIGHT = "height";
 };
 
 } // ns

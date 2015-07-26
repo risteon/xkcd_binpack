@@ -17,13 +17,13 @@
 #include <tinyxml2.h>
 #include <exception>
 
-#include "ShapeContainer.h"
+#include "ShapeCreator.h"
 
 namespace xkcd_binpack {
 
 using namespace boost::filesystem;
 
-void ShapeContainer::load(const std::string& data_access)
+void ShapeCreator::load(const std::string& data_access, ShapeCollection& sc)
 {
   path p(data_access);
 
@@ -35,12 +35,12 @@ void ShapeContainer::load(const std::string& data_access)
   // load from every image found
   if (is_directory(p))
   {
-    loadFromImageFolder(data_access);
+    loadFromImageFolder(data_access, sc);
   }
   // load from XML
   else if (is_regular_file(p) && p.extension() == ".xml")
   {
-    loadFromXML(p.string());
+    loadFromXML(p.string(), sc);
   }
   else
   {
@@ -48,7 +48,7 @@ void ShapeContainer::load(const std::string& data_access)
   }
 }
 
-void ShapeContainer::loadFromXML(const std::string &xml_file)
+void ShapeCreator::loadFromXML(const std::string &xml_file, ShapeCollection& sc)
 {
   tinyxml2::XMLDocument doc;
   if (doc.LoadFile(xml_file.c_str()) != tinyxml2::XML_SUCCESS)
@@ -59,6 +59,8 @@ void ShapeContainer::loadFromXML(const std::string &xml_file)
   {
     throw MessageException(std::string("Invalid XML File") );
   }
+
+  sc.clear();
   for (tinyxml2::XMLElement* node = root->FirstChildElement(XML_NODE); node != nullptr; node = node->NextSiblingElement(XML_NODE))
   {
     Shape::Ptr shape = std::make_shared<Shape>();
@@ -67,14 +69,15 @@ void ShapeContainer::loadFromXML(const std::string &xml_file)
       throw MessageException(std::string("Invalid XML File") );
     shape->setFilename(file);
     shape->setDimensions(node->IntAttribute(XML_WIDTH), node->IntAttribute(XML_HEIGHT));
-    m_shapes.push_back(shape);
+    sc.push_back(shape);
   }
 }
 
-void ShapeContainer::loadFromImageFolder(const std::string &directory)
+void ShapeCreator::loadFromImageFolder(const std::string &directory, ShapeCollection& sc)
 {
   path p(directory);
 
+  sc.clear();
   for (directory_iterator it = directory_iterator(p); it != directory_iterator(); it++)
   {
     if (it->path().extension() == ".jpg" || it->path().extension() == ".png")
@@ -90,7 +93,7 @@ void ShapeContainer::loadFromImageFolder(const std::string &directory)
         Shape::Ptr shape = std::make_shared<Shape>();
         shape->setDimensions(image.size().width, image.size().height);
         shape->setFilename(it->path().string());
-        m_shapes.push_back(shape);
+        sc.push_back(shape);
       }
 
     }
@@ -98,13 +101,13 @@ void ShapeContainer::loadFromImageFolder(const std::string &directory)
   }
 }
 
-void ShapeContainer::writeToXml(const std::string& filename)
+void ShapeCreator::writeToXml(const std::string& filename, const ShapeCollection& sc)
 {
   tinyxml2::XMLDocument doc;
   tinyxml2::XMLElement* root = doc.NewElement(XML_ROOT);
   doc.InsertFirstChild(root);
 
-  for (const Shape::ConstPtr& s : m_shapes)
+  for (const Shape::ConstPtr& s : sc)
   {
     tinyxml2::XMLElement* e = doc.NewElement(XML_NODE);
     root->InsertEndChild(e);

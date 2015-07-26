@@ -17,6 +17,7 @@
 
 #include <memory>
 #include <tuple>
+#include <vector>
 
 #include "Point.h"
 
@@ -67,6 +68,11 @@ private:
   //! Data to identify picture
   std::string m_filename;
 };
+
+//! Some typedefs
+typedef std::vector<Shape::Ptr> ShapeCollection;
+typedef std::shared_ptr<ShapeCollection> ShapeCollectionPtr;
+typedef std::shared_ptr<const ShapeCollection> ShapeCollectionConstPtr;
 
 } // ns
 
