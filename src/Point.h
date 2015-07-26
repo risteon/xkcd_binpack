@@ -12,14 +12,15 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef POINT_H
-#define POINT_H
+#ifndef XKCD_BINPACK_POINT_H
+#define XKCD_BINPACK_POINT_H
 
 #include <cmath>
 #include <stdint.h>
 
 namespace xkcd_binpack {
 
+//! Position aligned to pixel grid
 typedef int32_t _position_type;
 
 enum pointDirection
@@ -84,4 +85,4 @@ private:
 
 } // ns
 
-#endif //POINT_H
+#endif //XKCD_BINPACK_POINT_H
