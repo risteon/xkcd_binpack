@@ -14,8 +14,12 @@
 
 #include "Shape.h"
 
+namespace xkcd_binpack {
+
 Shape::Shape()
-  : m_dimensions({ 0, 0})
+        : m_dimensions({0, 0})
 {
 
 }
+
+} // ns

@@ -19,6 +19,8 @@
 
 #include "ShapeContainer.h"
 
+namespace xkcd_binpack {
+
 using namespace boost::filesystem;
 
 void ShapeContainer::load(const std::string& directory)
@@ -102,3 +104,5 @@ void ShapeContainer::writeToXml(const std::string& filename)
   if (doc.SaveFile(filename.c_str()) != tinyxml2::XML_SUCCESS)
     throw MessageException(std::string("Could not write shape data to <") + filename + std::string(">."));
 }
+
+} // ns

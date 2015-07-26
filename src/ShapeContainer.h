@@ -21,6 +21,8 @@
 #include "Shape.h"
 #include "MessageException.h"
 
+namespace xkcd_binpack {
+
 class ShapeContainer
 {
 public:
@@ -54,5 +56,6 @@ private:
   static const constexpr char* XML_HEIGHT = "height";
 };
 
+} // ns
 
 #endif //SHAPE_CONTAINER_H

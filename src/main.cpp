@@ -17,6 +17,8 @@
 
 #include "ShapeContainer.h"
 
+using namespace xkcd_binpack;
+
 int main(int argc, char** argv )
 {
     if ( argc < 2 )

@@ -18,9 +18,12 @@
 #include <cmath>
 #include <stdint.h>
 
+namespace xkcd_binpack {
+
 typedef int32_t _position_type;
 
-enum pointDirection {
+enum pointDirection
+{
   onLine = 0,
   left = -1,
   right = 1
@@ -30,32 +33,47 @@ class Point
 {
 public:
   Point()
-    : m_x(0)
-    , m_y(0)
-  {}
+          : m_x(0), m_y(0) { }
+
   Point(_position_type x, _position_type y);
 
-  virtual ~Point()    {}
+  virtual ~Point() { }
 
   //! Getter
-  virtual _position_type getX() const                 { return m_x; }
-  virtual _position_type getY() const                 { return m_y; }
+  virtual _position_type getX() const { return m_x; }
+
+  virtual _position_type getY() const { return m_y; }
 
   //! Setter
-  virtual void setX(_position_type x)                 { m_x = x; }
-  virtual void setY(_position_type y)                 { m_y = y; }
+  virtual void setX(_position_type x) { m_x = x; }
+
+  virtual void setY(_position_type y) { m_y = y; }
 
   //! Access via reference
-  virtual _position_type& x()                         { return m_x; }
-  virtual _position_type& y()                         { return m_y; }
-  
+  virtual _position_type &x() { return m_x; }
+
+  virtual _position_type &y() { return m_y; }
+
   _position_type distanceToPoint(const Point &);
 
   //!
-  Point operator+(const Point& rhs) const             { return Point(m_x + rhs.getX(), m_y + rhs.getY()); }
-  Point operator-(const Point& rhs) const             { return Point(m_x - rhs.getX(), m_y - rhs.getY()); }
-  Point& operator+=(const Point& rhs)                 { m_x += rhs.getX(); m_y += rhs.getY(); return *this; }
-  Point& operator-=(const Point& rhs)                 { m_x -= rhs.getX(); m_y -= rhs.getY(); return *this; }
+  Point operator+(const Point &rhs) const { return Point(m_x + rhs.getX(), m_y + rhs.getY()); }
+
+  Point operator-(const Point &rhs) const { return Point(m_x - rhs.getX(), m_y - rhs.getY()); }
+
+  Point &operator+=(const Point &rhs)
+  {
+    m_x += rhs.getX();
+    m_y += rhs.getY();
+    return *this;
+  }
+
+  Point &operator-=(const Point &rhs)
+  {
+    m_x -= rhs.getX();
+    m_y -= rhs.getY();
+    return *this;
+  }
 
 protected:
   _position_type m_x;
@@ -63,5 +81,7 @@ protected:
 
 private:
 };
+
+} // ns
 
 #endif //POINT_H

@@ -20,6 +20,8 @@
 
 #include "Point.h"
 
+namespace xkcd_binpack {
+
 class Shape
 {
 public:
@@ -37,21 +39,23 @@ public:
   Shape();
 
   //! Destructor
-  virtual ~Shape()     {}
+  virtual ~Shape() { }
 
   //!
-  void setPosition(const Point& position)                               { m_position = position; }
+  void setPosition(const Point &position) { m_position = position; }
 
   //!
-  void setDimensions(_dimension_type width, _dimension_type height)     { m_dimensions = { width, height }; }
+  void setDimensions(_dimension_type width, _dimension_type height) { m_dimensions = {width, height}; }
 
   //!
-  void setFilename(const std::string& filename)                         { m_filename = filename; }
+  void setFilename(const std::string &filename) { m_filename = filename; }
 
   //! Read Access
-  const Point& getPosition() const                { return m_position; }
-  const Dimensions& getDimensions() const         { return m_dimensions; }
-  const std::string& getFilename() const          { return m_filename; }
+  const Point &getPosition() const { return m_position; }
+
+  const Dimensions &getDimensions() const { return m_dimensions; }
+
+  const std::string &getFilename() const { return m_filename; }
 
 private:
   //! Position of shape
@@ -64,5 +68,6 @@ private:
   std::string m_filename;
 };
 
+} // ns
 
 #endif //SHAPE_H
