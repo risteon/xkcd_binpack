@@ -16,15 +16,17 @@ include_directories(
 )
 
 set(HEADERS
+  src/Canvas.h
   src/MessageException.h
   src/Point.h
-  src/ShapeContainer.h
+  src/ShapeCreator.h
   src/Shape.h
 )
 
 set(SOURCES
+  src/Canvas.cpp
   src/Point.cpp
-  src/ShapeContainer.cpp
+  src/ShapeCreator.cpp
   src/Shape.cpp
   src/main.cpp
 )
