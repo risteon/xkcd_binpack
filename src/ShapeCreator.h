@@ -18,7 +18,7 @@
 #include <memory>
 #include <vector>
 
-#include "Shape.h"
+#include "ShapeAlignedRectangle.h"
 #include "MessageException.h"
 
 namespace xkcd_binpack {

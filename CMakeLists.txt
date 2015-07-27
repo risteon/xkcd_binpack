@@ -20,14 +20,14 @@ set(HEADERS
   src/MessageException.h
   src/Point.h
   src/ShapeCreator.h
-  src/Shape.h
+  src/ShapeAlignedRectangle.h
 )
 
 set(SOURCES
   src/Canvas.cpp
   src/Point.cpp
   src/ShapeCreator.cpp
-  src/Shape.cpp
+  src/ShapeAlignedRectangle.cpp
   src/main.cpp
 )
 

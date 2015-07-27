@@ -63,7 +63,7 @@ void ShapeCreator::loadFromXML(const std::string &xml_file, ShapeCollection& sc)
   sc.clear();
   for (tinyxml2::XMLElement* node = root->FirstChildElement(XML_NODE); node != nullptr; node = node->NextSiblingElement(XML_NODE))
   {
-    Shape::Ptr shape = std::make_shared<Shape>();
+    ShapeAlignedRectangle::Ptr shape = std::make_shared<ShapeAlignedRectangle>();
     const char* file = node->Attribute(XML_PATH);
     if (file == nullptr)
       throw MessageException(std::string("Invalid XML File") );
@@ -90,7 +90,7 @@ void ShapeCreator::loadFromImageFolder(const std::string &directory, ShapeCollec
       }
       else
       {
-        Shape::Ptr shape = std::make_shared<Shape>();
+        ShapeAlignedRectangle::Ptr shape = std::make_shared<ShapeAlignedRectangle>();
         shape->setDimensions(image.size().width, image.size().height);
         shape->setFilename(it->path().string());
         sc.push_back(shape);
@@ -107,7 +107,7 @@ void ShapeCreator::writeToXml(const std::string& filename, const ShapeCollection
   tinyxml2::XMLElement* root = doc.NewElement(XML_ROOT);
   doc.InsertFirstChild(root);
 
-  for (const Shape::ConstPtr& s : sc)
+  for (const ShapeAlignedRectangle::ConstPtr& s : sc)
   {
     tinyxml2::XMLElement* e = doc.NewElement(XML_NODE);
     root->InsertEndChild(e);

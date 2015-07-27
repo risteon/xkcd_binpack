@@ -5,7 +5,7 @@
 #ifndef XKCD_BINPACK_SHAPEPACKERBASE_H
 #define XKCD_BINPACK_SHAPEPACKERBASE_H
 
-#include "Shape.h"
+#include "ShapeAlignedRectangle.h"
 
 namespace xkcd_binpack {
 

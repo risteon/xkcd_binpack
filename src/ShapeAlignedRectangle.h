@@ -23,24 +23,27 @@
 
 namespace xkcd_binpack {
 
-class Shape
+/**
+ * class ShapeAlignedRectangle: represents an aligned rectangle
+ */
+class ShapeAlignedRectangle
 {
 public:
   //! Pointer shorthand
-  typedef std::shared_ptr<Shape> Ptr;
+  typedef std::shared_ptr<ShapeAlignedRectangle> Ptr;
 
   //! Const Pointer shorthand
-  typedef std::shared_ptr<const Shape> ConstPtr;
+  typedef std::shared_ptr<const ShapeAlignedRectangle> ConstPtr;
 
   //! Dimensions
   typedef u_int32_t _dimension_type;
   typedef std::array<_dimension_type, 2> Dimensions;
 
   //! Constructor
-  Shape();
+  ShapeAlignedRectangle();
 
   //! Destructor
-  virtual ~Shape() { }
+  virtual ~ShapeAlignedRectangle() { }
 
   //!
   void setPosition(const Point &position) { m_position = position; }
@@ -70,7 +73,7 @@ private:
 };
 
 //! Some typedefs
-typedef std::vector<Shape::Ptr> ShapeCollection;
+typedef std::vector<ShapeAlignedRectangle::Ptr> ShapeCollection;
 typedef std::shared_ptr<ShapeCollection> ShapeCollectionPtr;
 typedef std::shared_ptr<const ShapeCollection> ShapeCollectionConstPtr;
 

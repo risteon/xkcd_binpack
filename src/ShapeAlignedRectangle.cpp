@@ -12,11 +12,11 @@
  */
 //----------------------------------------------------------------------
 
-#include "Shape.h"
+#include "ShapeAlignedRectangle.h"
 
 namespace xkcd_binpack {
 
-Shape::Shape()
+ShapeAlignedRectangle::ShapeAlignedRectangle()
         : m_dimensions({0, 0})
 {
 
