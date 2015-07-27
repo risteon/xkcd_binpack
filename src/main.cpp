@@ -15,7 +15,8 @@
 #include <stdio.h>
 #include <iostream>
 
-#include "ShapeCreator.h"
+#include "Canvas.h"
+#include "ShapePackerGrid.h"
 
 using namespace xkcd_binpack;
 
@@ -27,17 +28,28 @@ int main(int argc, char** argv )
     return -1;
   }
 
-  ShapeCollection sc;
+  // Shapes
+  ShapeCollectionPtr sc = std::make_shared<ShapeCollection>();
   try
   {
-    ShapeCreator::load(std::string(argv[1]), sc);
+    ShapeCreator::load(std::string(argv[1]), *sc);
     if (argc > 2)
-      ShapeCreator::writeToXml(argv[2], sc);
+      ShapeCreator::writeToXml(argv[2], *sc);
   }
   catch (MessageException& e)
   {
     std::cout <<e.what() <<std::endl;
   }
+
+  // Canvas
+  Canvas canvas;
+  canvas.setShapes(sc);
+
+  // Packer
+  ShapePackerGrid::Ptr spg = std::make_shared<ShapePackerGrid>();
+
+  // Binpacking
+  canvas.rearrangeShapes(spg);
 
   return 0;
 }

@@ -31,7 +31,7 @@ set(SOURCES
   src/main.cpp
 )
 
-add_executable( xkcd_binpack ${SOURCES} )
+add_executable( xkcd_binpack ${SOURCES} src/ShapePackerBase.cpp src/ShapePackerBase.h src/ShapePackerGrid.cpp src/ShapePackerGrid.h)
 
 target_link_libraries( xkcd_binpack
   ${OpenCV_LIBS}
