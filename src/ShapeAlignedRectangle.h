@@ -79,12 +79,15 @@ public:
   void setFilename(const std::string &filename) { m_filename = filename; }
 
   //! Read Access
-  const Pixel &getPosition() const { return m_corners[UP_LEFT]; }
-  const Dimensions &getDimensions() const { return m_dimensions; }
-  const std::string &getFilename() const { return m_filename; }
+  const Pixel& getPosition() const                  { return m_corners[UP_LEFT]; }
+  const Dimensions& getDimensions() const           { return m_dimensions; }
+  const std::string& getFilename() const            { return m_filename; }
+  const CornerPixels& getCornerPixels() const       { return m_corners; }
 
-  //! Check for collision
+  //! Check for collision, returns true on collision
   bool checkCollision(const ShapeAlignedRectangle& other) const;
+  bool checkCollision(const Pixel& pixel) const;
+
 
 private:
   //! Calculate from position and dimensions
