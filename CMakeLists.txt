@@ -18,14 +18,14 @@ include_directories(
 set(HEADERS
   src/Canvas.h
   src/MessageException.h
-  src/Point.h
+  src/Pixel.h
   src/ShapeCreator.h
   src/ShapeAlignedRectangle.h
 )
 
 set(SOURCES
   src/Canvas.cpp
-  src/Point.cpp
+  src/Pixel.cpp
   src/ShapeCreator.cpp
   src/ShapeAlignedRectangle.cpp
   src/main.cpp

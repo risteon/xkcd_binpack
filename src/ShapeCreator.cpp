@@ -112,8 +112,8 @@ void ShapeCreator::writeToXml(const std::string& filename, const ShapeCollection
     tinyxml2::XMLElement* e = doc.NewElement(XML_NODE);
     root->InsertEndChild(e);
     e->SetAttribute(XML_PATH, s->getFilename().c_str());
-    e->SetAttribute(XML_WIDTH, s->getDimensions()[0]);
-    e->SetAttribute(XML_HEIGHT, s->getDimensions()[1]);
+    e->SetAttribute(XML_WIDTH, s->getDimensions().x);
+    e->SetAttribute(XML_HEIGHT, s->getDimensions().y);
   }
 
   if (doc.SaveFile(filename.c_str()) != tinyxml2::XML_SUCCESS)

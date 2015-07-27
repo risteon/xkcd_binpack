@@ -12,22 +12,9 @@
  */
 //----------------------------------------------------------------------
 
-#include "Point.h"
+#include "Pixel.h"
 
 namespace xkcd_binpack {
 
-Point::Point(_position_type x, _position_type y)
-        : m_x(x), m_y(y)
-{
-
-}
-
-_position_type Point::distanceToPoint(const Point &p)
-{
-  _position_type a = pow(getX() - p.getX(), 2);
-  _position_type b = pow(getY() - p.getY(), 2);
-  _position_type distance = sqrt(a + b);
-  return distance;
-}
 
 } // ns

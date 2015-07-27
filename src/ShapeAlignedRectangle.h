@@ -19,12 +19,22 @@
 #include <tuple>
 #include <vector>
 
-#include "Point.h"
+#include "Pixel.h"
 
 namespace xkcd_binpack {
 
 /**
  * class ShapeAlignedRectangle: represents an aligned rectangle
+ *
+ *
+ *    --------> x
+ *   |X
+ *   |
+ *   |
+ *   V
+ *   y
+ *
+ *
  */
 class ShapeAlignedRectangle
 {
@@ -36,8 +46,17 @@ public:
   typedef std::shared_ptr<const ShapeAlignedRectangle> ConstPtr;
 
   //! Dimensions
-  typedef u_int32_t _dimension_type;
-  typedef std::array<_dimension_type, 2> Dimensions;
+  typedef _pixel_position_t _dimension_type;
+  typedef Pixel Dimensions;
+  //! Corner pixels
+  typedef std::array<Pixel, 4> CornerPixels;
+  enum CORNER_PIXELS : u_int8_t
+  {
+    UP_LEFT=0,
+    UP_RIGHT=1,
+    DOWN_RIGHT=2,
+    DOWN_LEFT=3
+  };
 
   //! Constructor
   ShapeAlignedRectangle();
@@ -45,28 +64,37 @@ public:
   //! Destructor
   virtual ~ShapeAlignedRectangle() { }
 
-  //!
-  void setPosition(const Point &position) { m_position = position; }
+  //! Setter
+  void setPosition(const Pixel &position)
+  {
+    m_corners[UP_LEFT] = position;
+    updateCornerPixels();
+  }
+  void setDimensions(_dimension_type width, _dimension_type height)
+  {
+    m_dimensions = {width, height};
+    updateCornerPixels();
+  }
 
-  //!
-  void setDimensions(_dimension_type width, _dimension_type height) { m_dimensions = {width, height}; }
-
-  //!
   void setFilename(const std::string &filename) { m_filename = filename; }
 
   //! Read Access
-  const Point &getPosition() const { return m_position; }
-
+  const Pixel &getPosition() const { return m_corners[UP_LEFT]; }
   const Dimensions &getDimensions() const { return m_dimensions; }
-
   const std::string &getFilename() const { return m_filename; }
 
+  //! Check for collision
+  bool checkCollision(const ShapeAlignedRectangle& other) const;
+
 private:
-  //! Position of shape
-  Point m_position;
+  //! Calculate from position and dimensions
+  void updateCornerPixels();
 
   //! Dimensions
   Dimensions m_dimensions;
+
+  //! Corners
+  CornerPixels m_corners;
 
   //! Data to identify picture
   std::string m_filename;
