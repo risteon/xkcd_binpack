@@ -21,6 +21,8 @@ set(HEADERS
   src/Pixel.h
   src/ShapeCreator.h
   src/ShapeAlignedRectangle.h
+  src/ShapePackerBase.h
+  src/ShapePackerGrid.h
 )
 
 set(SOURCES
@@ -28,10 +30,12 @@ set(SOURCES
   src/Pixel.cpp
   src/ShapeCreator.cpp
   src/ShapeAlignedRectangle.cpp
+  src/ShapePackerBase.cpp
+  src/ShapePackerGrid.cpp
   src/main.cpp
 )
 
-add_executable( xkcd_binpack ${SOURCES} src/ShapePackerBase.cpp src/ShapePackerBase.h src/ShapePackerGrid.cpp src/ShapePackerGrid.h)
+add_executable( xkcd_binpack ${SOURCES} )
 
 target_link_libraries( xkcd_binpack
   ${OpenCV_LIBS}
