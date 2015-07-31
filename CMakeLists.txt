@@ -1,45 +1,21 @@
-cmake_minimum_required(VERSION 2.8)
-project( xkcd_binpack )
+# this is for emacs file handling -*- mode: cmake; indent-tabs-mode: nil -*-
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
-find_package( OpenCV REQUIRED )
-find_package(Boost COMPONENTS system filesystem REQUIRED)
+PROJECT(xkcd_binpack)
 
-# Enable C++11 support in GNU-Compiler
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-SET(CMAKE_BUILD_TYPE "Debug")
+SET(CMAKE_INCLUDE_CURRENT_DIR_ON)
 
-add_subdirectory(tinyxml2)
 
-include_directories(
-  export/include
-)
+enable_testing()
 
-set(HEADERS
-  src/Canvas.h
-  src/MessageException.h
-  src/Pixel.h
-  src/ShapeCreator.h
-  src/ShapeAlignedRectangle.h
-  src/ShapePackerBase.h
-  src/ShapePackerGrid.h
-)
+ADD_SUBDIRECTORY(src/tinyxml2)
 
-set(SOURCES
-  src/Canvas.cpp
-  src/Pixel.cpp
-  src/ShapeCreator.cpp
-  src/ShapeAlignedRectangle.cpp
-  src/ShapePackerBase.cpp
-  src/ShapePackerGrid.cpp
-  src/main.cpp
-)
+ADD_SUBDIRECTORY(src/xkcd_binpack)
 
-add_executable( xkcd_binpack ${SOURCES} )
+ADD_SUBDIRECTORY(src/tools)
 
-target_link_libraries( xkcd_binpack
-  ${OpenCV_LIBS}
-  ${Boost_SYSTEM_LIBRARY}
-  ${Boost_FILESYSTEM_LIBRARY}
-  tinyxml2
-)
+IF(BUILD_TESTS)
+  ADD_SUBDIRECTORY(src/test)
+ENDIF(BUILD_TESTS)
+
