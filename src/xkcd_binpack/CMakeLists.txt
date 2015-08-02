@@ -20,7 +20,7 @@ set(HEADERS
   ShapePackerGrid.h
 )
 
-set(SOURCES
+set(xkcd_binpack_SOURCES
   Canvas.cpp
   Pixel.cpp
   ShapeCreator.cpp
@@ -30,7 +30,7 @@ set(SOURCES
   main.cpp
 )
 
-add_executable( xkcd_binpack ${SOURCES} )
+add_executable( xkcd_binpack ${xkcd_binpack_SOURCES} )
 
 target_link_libraries( xkcd_binpack
   ${OpenCV_LIBS}

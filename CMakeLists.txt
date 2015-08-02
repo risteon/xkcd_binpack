@@ -13,11 +13,16 @@ set(CMAKE_INCLUDE_CURRENT_DIR_ON)
 
 find_package(Threads REQUIRED)
 
+find_package( OpenCV REQUIRED )
+find_package(Boost COMPONENTS system filesystem REQUIRED)
+
+# Enable C++11 support in GNU-Compiler
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 #-------------------
 # set common include folder for module
 #-------------------
-set(COMMON_INCLUDES ${PROJECT_SOURCE_DIR}/include)
+set(COMMON_INCLUDES ${PROJECT_SOURCE_DIR}/src)
 set(EXT_PROJECTS_DIR ${PROJECT_SOURCE_DIR}/ext)
 
 
@@ -47,14 +52,27 @@ enable_testing()
 set(PROJECT_TEST_NAME ${PROJECT_NAME_STR}_test)
 include_directories(${GTEST_INCLUDE_DIRS} ${COMMON_INCLUDES})
 
+set(xkcd_binpack_SOURCES
+  src/xkcd_binpack/Canvas.cpp
+  src/xkcd_binpack/Pixel.cpp
+  src/xkcd_binpack/ShapeCreator.cpp
+  src/xkcd_binpack/ShapeAlignedRectangle.cpp
+  src/xkcd_binpack/ShapePackerBase.cpp
+  src/xkcd_binpack/ShapePackerGrid.cpp
+)
+
 file(GLOB TEST_SRC_FILES ${PROJECT_SOURCE_DIR}/test/*.cpp)
-add_executable(${PROJECT_TEST_NAME} ${TEST_SRC_FILES})
+add_executable(${PROJECT_TEST_NAME} ${TEST_SRC_FILES} ${xkcd_binpack_SOURCES})
 add_dependencies(${PROJECT_TEST_NAME} googletest)
 
 
 target_link_libraries(${PROJECT_TEST_NAME}
   ${GTEST_LIBS_DIR}/libgtest.a
   ${GTEST_LIBS_DIR}/libgtest_main.a
+  ${OpenCV_LIBS}
+  ${Boost_SYSTEM_LIBRARY}
+  ${Boost_FILESYSTEM_LIBRARY}
+  tinyxml2
 )
 
 
