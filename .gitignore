@@ -39,3 +39,6 @@ export/**
 
 # Clion ideo
 .idea/**
+
+# Googletest temporary
+Testing/**
