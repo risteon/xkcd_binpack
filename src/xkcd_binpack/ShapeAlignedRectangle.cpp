@@ -25,19 +25,10 @@ ShapeAlignedRectangle::ShapeAlignedRectangle()
 
 bool ShapeAlignedRectangle::checkCollision(const ShapeAlignedRectangle &other) const
 {
-  for (const Pixel& p : other.getCornerPixels())
-  {
-    if (checkCollision(p))
-      return true;
-  }
-
-  for (const Pixel& p : getCornerPixels())
-  {
-    if (other.checkCollision(p))
-      return true;
-  }
-
-  return false;
+  return m_corners[UP_LEFT].x < other.getCornerPixels()[UP_RIGHT].x &&
+         m_corners[UP_RIGHT].x > other.getCornerPixels()[UP_LEFT].x &&
+         m_corners[UP_LEFT].y < other.getCornerPixels()[DOWN_LEFT].y &&
+         m_corners[DOWN_LEFT].y > other.getCornerPixels()[UP_LEFT].y;
 }
 
 void ShapeAlignedRectangle::updateCornerPixels()

@@ -84,6 +84,9 @@ public:
   const std::string& getFilename() const            { return m_filename; }
   const CornerPixels& getCornerPixels() const       { return m_corners; }
 
+  _dimension_type getWidth() const                  { return m_dimensions.x; }
+  _dimension_type getHeight() const                 { return m_dimensions.y; }
+
   //! Check for collision, returns true on collision
   bool checkCollision(const ShapeAlignedRectangle& other) const;
   bool checkCollision(const Pixel& pixel) const;
