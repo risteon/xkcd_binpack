@@ -15,8 +15,8 @@
 #include <stdio.h>
 #include <iostream>
 
-#include "Canvas.h"
-#include "ShapePackerGrid.h"
+#include "xkcd_binpack/Canvas.h"
+#include "xkcd_binpack/ShapePackerGrid.h"
 
 using namespace xkcd_binpack;
 
@@ -50,6 +50,9 @@ int main(int argc, char** argv )
 
   // Binpacking
   canvas.rearrangeShapes(spg);
+
+  ShapeAlignedRectangle r1;
+  r1.checkCollision(Pixel(0,0));
 
   return 0;
 }

@@ -42,7 +42,7 @@ void ShapeAlignedRectangle::updateCornerPixels()
   m_corners[DOWN_RIGHT] = m_corners[UP_LEFT] + m_dimensions - Pixel(1,1);
 }
 
-inline bool ShapeAlignedRectangle::checkCollision(const Pixel &pixel) const
+bool ShapeAlignedRectangle::checkCollision(const Pixel &pixel) const
 {
   return pixel.x >= m_corners[UP_LEFT].x && pixel.x <= m_corners[DOWN_RIGHT].x
           && pixel.y >= m_corners[UP_LEFT].y && pixel.y <= m_corners[DOWN_RIGHT].y;

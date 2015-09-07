@@ -1,14 +1,13 @@
-find_package( OpenCV REQUIRED )
+find_package(OpenCV REQUIRED)
+
+set (Boost_USE_STATIC_LIBS OFF) # enable dynamic linking
+set (Boost_USE_MULTITHREAD ON)  # enable multithreading
 find_package(Boost COMPONENTS system filesystem REQUIRED)
 
 # Enable C++11 support in GNU-Compiler
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 SET(CMAKE_BUILD_TYPE "Debug")
-
-include_directories(
-  export/include
-)
 
 set(HEADERS
   Canvas.h
@@ -27,10 +26,11 @@ set(xkcd_binpack_SOURCES
   ShapeAlignedRectangle.cpp
   ShapePackerBase.cpp
   ShapePackerGrid.cpp
-  main.cpp
 )
 
-add_executable( xkcd_binpack ${xkcd_binpack_SOURCES} )
+set(xkcd_binpack_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/.. CACHE INTERNAL "")
+
+add_library( xkcd_binpack SHARED ${xkcd_binpack_SOURCES} )
 
 target_link_libraries( xkcd_binpack
   ${OpenCV_LIBS}
