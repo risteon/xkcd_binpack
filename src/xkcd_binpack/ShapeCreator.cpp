@@ -14,7 +14,7 @@
 
 #include <boost/filesystem.hpp>
 #include <opencv2/opencv.hpp>
-#include <tinyxml2.h>
+#include <tinyxml2/tinyxml2.h>
 #include <exception>
 
 #include "ShapeCreator.h"

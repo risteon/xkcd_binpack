@@ -30,6 +30,8 @@ set(xkcd_binpack_SOURCES
 
 set(xkcd_binpack_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/.. CACHE INTERNAL "")
 
+include_directories(${tinyxml2_INCLUDE_DIRS})
+
 add_library( xkcd_binpack SHARED ${xkcd_binpack_SOURCES} )
 
 target_link_libraries( xkcd_binpack

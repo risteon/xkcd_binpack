@@ -12,6 +12,8 @@ set(HEADER_FILES
   tinyxml2.h
 )
 
+set(tinyxml2_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/.. CACHE INTERNAL "")
+
 add_library(${LIBRARY_NAME} SHARED ${SOURCE_FILES} )
 
 install(FILES ${HEADER_FILES}
